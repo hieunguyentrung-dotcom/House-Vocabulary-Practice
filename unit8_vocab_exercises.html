@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8 – Vocabulary Exercises</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+  :root {
+    --orange: #e65100; --orange-light: #fff3e0; --orange-mid: #ff6d00;
+    --blue: #1565c0; --blue-light: #e3f2fd;
+    --green: #2e7d32; --green-light: #e8f5e9;
+    --red: #c62828; --red-light: #ffebee;
+    --purple: #6a1b9a; --purple-light: #f3e5f5;
+    --teal: #00695c; --teal-light: #e0f2f1;
+    --gray: #546e7a; --bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: #1a1a2e; line-height: 1.6; }
+
+  .header {
+    background: linear-gradient(135deg, #bf360c 0%, #e64a19 100%);
+    padding: 28px 24px; text-align: center; color: white;
+  }
+  .header .badge {
+    display: inline-block; background: rgba(255,255,255,0.2);
+    border: 1.5px solid rgba(255,255,255,0.3); border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 3px 14px; margin-bottom: 8px;
+  }
+  .header h1 { font-size: clamp(18px,3.5vw,28px); font-weight: 800; margin-bottom: 4px; }
+  .header p { font-size: 13px; opacity: 0.85; }
+
+  /* TOPIC TABS */
+  .topic-nav {
+    display: flex; overflow-x: auto; background: white;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    position: sticky; top: 0; z-index: 20;
+  }
+  .topic-tab {
+    padding: 11px 16px; font-size: 12px; font-weight: 700;
+    color: var(--gray); cursor: pointer; white-space: nowrap;
+    border-bottom: 3px solid transparent; transition: all 0.2s;
+    background: none; border-top: none; border-left: none; border-right: none;
+    font-family: inherit;
+  }
+  .topic-tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+  .topic-tab:hover { background: var(--orange-light); }
+
+  /* EXERCISE TYPE TABS */
+  .ex-nav {
+    display: flex; gap: 8px; padding: 14px 16px 0;
+    max-width: 860px; margin: 0 auto;
+  }
+  .ex-btn {
+    padding: 8px 16px; border-radius: 20px; border: 1.5px solid #e0e0e0;
+    font-family: inherit; font-size: 12px; font-weight: 700;
+    cursor: pointer; background: white; color: var(--gray);
+    transition: all 0.2s;
+  }
+  .ex-btn.active { background: var(--orange); color: white; border-color: var(--orange); }
+  .ex-btn:hover:not(.active) { border-color: var(--orange); color: var(--orange); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 16px 16px 48px; }
+  .topic-panel { display: none; }
+  .topic-panel.active { display: block; }
+  .ex-panel { display: none; }
+  .ex-panel.active { display: block; }
+
+  /* SECTION */
+  .section {
+    background: white; border-radius: 14px;
+    padding: 20px; margin-bottom: 16px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+  }
+  .sec-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--orange-light);
+  }
+  .sec-icon {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: var(--orange-light); color: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .sec-head h3 { font-size: 14px; font-weight: 800; }
+  .sec-tag {
+    margin-left: auto; font-size: 11px; font-weight: 700;
+    padding: 2px 9px; border-radius: 10px;
+    background: var(--orange-light); color: var(--orange); white-space: nowrap;
+  }
+
+  /* MATCHING */
+  .match-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .match-col h4 { font-size: 12px; font-weight: 800; color: var(--gray); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .match-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px; border-radius: 8px;
+    border: 1.5px solid #e8eaed; font-size: 13px; margin-bottom: 6px;
+    cursor: pointer; transition: all 0.2s; user-select: none;
+    background: white;
+  }
+  .match-item:hover { border-color: var(--orange); background: var(--orange-light); }
+  .match-item.selected { border-color: var(--orange); background: var(--orange-light); }
+  .match-item.matched { border-color: var(--green); background: var(--green-light); cursor: default; }
+  .match-item.wrong { border-color: var(--red); background: var(--red-light); }
+  .match-num {
+    min-width: 22px; height: 22px; border-radius: 50%;
+    background: var(--orange); color: white; font-size: 11px;
+    font-weight: 800; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+  }
+  .match-item.matched .match-num { background: var(--green); }
+
+  /* MCQ */
+  .mcq-item { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid #f0f0f0; }
+  .mcq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .mcq-q { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: #202124; }
+  .mcq-q .qnum { color: var(--orange); margin-right: 4px; }
+  .mcq-opts { display: flex; flex-direction: column; gap: 6px; }
+  .mcq-opt {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; border-radius: 8px; border: 1.5px solid #e8eaed;
+    font-size: 13px; cursor: pointer; transition: all 0.2s;
+    background: white; font-family: inherit; text-align: left;
+  }
+  .mcq-opt:hover { border-color: var(--blue); background: var(--blue-light); }
+  .mcq-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); font-weight: 700; }
+  .mcq-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+  .mcq-opt.disabled { cursor: default; opacity: 0.6; }
+  .mcq-opt.disabled:hover { border-color: #e8eaed; background: white; }
+  .opt-letter {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #e8eaed; color: var(--gray); font-size: 11px;
+    font-weight: 800; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+  }
+  .mcq-opt.correct .opt-letter { background: var(--green); color: white; }
+  .mcq-opt.wrong .opt-letter { background: var(--red); color: white; }
+
+  /* TRANSLATION */
+  .trans-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0; border-bottom: 1px solid #f5f5f5; font-size: 14px;
+  }
+  .trans-item:last-child { border-bottom: none; }
+  .trans-num {
+    min-width: 24px; height: 24px; border-radius: 50%;
+    background: var(--orange); color: white; font-size: 11px;
+    font-weight: 800; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; margin-top: 2px;
+  }
+  .trans-en { flex: 1; color: #37474f; font-weight: 600; }
+  .trans-input {
+    flex: 1; border: 1.5px solid #cfd8dc; border-radius: 8px;
+    padding: 7px 10px; font-family: inherit; font-size: 13px;
+    outline: none; transition: border-color 0.2s;
+  }
+  .trans-input:focus { border-color: var(--orange); }
+  .trans-input.correct { border-color: var(--green); background: var(--green-light); }
+  .trans-input.wrong { border-color: var(--red); background: var(--red-light); }
+
+  /* ANSWER KEY */
+  .answer-key {
+    display: none; margin-top: 14px;
+    background: var(--green-light); border-radius: 10px;
+    padding: 12px 16px; border: 1.5px solid #a5d6a7;
+  }
+  .answer-key h4 { font-size: 12px; color: var(--green); font-weight: 800; margin-bottom: 8px; }
+  .key-row {
+    display: flex; gap: 8px; padding: 4px 0;
+    border-bottom: 1px solid #c8e6c9; font-size: 12px;
+  }
+  .key-row:last-child { border-bottom: none; }
+  .k-n {
+    min-width: 20px; height: 20px; border-radius: 50%;
+    background: var(--green); color: white; font-size: 10px;
+    font-weight: 800; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .k-a { font-weight: 700; color: #2e7d32; }
+
+  /* BTN */
+  .btn-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .btn {
+    padding: 9px 20px; border-radius: 9px; border: none;
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-orange { background: var(--orange); color: white; }
+  .btn-orange:hover { background: #bf360c; }
+  .btn-red { background: var(--red); color: white; }
+  .btn-gray { background: #eceff1; color: var(--gray); }
+
+  /* SCORE BADGE */
+  .score-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 20px; font-size: 13px;
+    font-weight: 700; margin-top: 12px;
+  }
+  .score-good { background: var(--green-light); color: var(--green); }
+  .score-mid { background: #fff3e0; color: var(--orange); }
+  .score-low { background: var(--red-light); color: var(--red); }
+
+  /* INSTRUCTION */
+  .instruction {
+    background: var(--blue-light); border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 14px;
+    font-size: 12px; color: var(--blue); font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">Flash for Construction – Unit 8</div>
+  <h1>House Systems – Vocabulary Exercises</h1>
+  <p>Matching · Multiple Choice · Translation</p>
+</div>
+
+<!-- TOPIC NAVIGATION -->
+<div class="topic-nav">
+  <button class="topic-tab active" onclick="switchTopic('p1',this)">🔧 Plumbing</button>
+  <button class="topic-tab" onclick="switchTopic('p2',this)">⚡ Electrical</button>
+  <button class="topic-tab" onclick="switchTopic('p3',this)">🔥 Heating</button>
+  <button class="topic-tab" onclick="switchTopic('p4',this)">☀️ Solar</button>
+  <button class="topic-tab" onclick="switchTopic('p5',this)">💨 Ventilation</button>
+</div>
+
+<div class="container">
+
+<!-- ==================== PLUMBING ==================== -->
+<div class="topic-panel active" id="p1">
+  <div class="ex-nav">
+    <button class="ex-btn active" onclick="switchEx('p1','m',this)">🔗 Matching</button>
+    <button class="ex-btn" onclick="switchEx('p1','q',this)">❓ Multiple Choice</button>
+    <button class="ex-btn" onclick="switchEx('p1','t',this)">🌐 Translation</button>
+  </div>
+
+  <!-- MATCHING -->
+  <div class="ex-panel active" id="p1-m" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head">
+        <div class="sec-icon">🔗</div>
+        <h3>Match the terms with their Vietnamese meanings</h3>
+        <span class="sec-tag">10 pairs</span>
+      </div>
+      <div class="instruction">Click a term on the left, then click its meaning on the right.</div>
+      <div class="match-grid">
+        <div class="match-col">
+          <h4>English Terms</h4>
+          <div class="match-item" id="p1m-L1" onclick="selectMatch(this,'p1m','1')"><span class="match-num">1</span> plumbing system</div>
+          <div class="match-item" id="p1m-L2" onclick="selectMatch(this,'p1m','2')"><span class="match-num">2</span> pipe</div>
+          <div class="match-item" id="p1m-L3" onclick="selectMatch(this,'p1m','3')"><span class="match-num">3</span> tap water</div>
+          <div class="match-item" id="p1m-L4" onclick="selectMatch(this,'p1m','4')"><span class="match-num">4</span> drainage system</div>
+          <div class="match-item" id="p1m-L5" onclick="selectMatch(this,'p1m','5')"><span class="match-num">5</span> fixture</div>
+          <div class="match-item" id="p1m-L6" onclick="selectMatch(this,'p1m','6')"><span class="match-num">6</span> waterborne waste</div>
+          <div class="match-item" id="p1m-L7" onclick="selectMatch(this,'p1m','7')"><span class="match-num">7</span> high-pressure pump</div>
+          <div class="match-item" id="p1m-L8" onclick="selectMatch(this,'p1m','8')"><span class="match-num">8</span> district heating</div>
+          <div class="match-item" id="p1m-L9" onclick="selectMatch(this,'p1m','9')"><span class="match-num">9</span> vent system</div>
+          <div class="match-item" id="p1m-L10" onclick="selectMatch(this,'p1m','10')"><span class="match-num">10</span> cast iron</div>
+        </div>
+        <div class="match-col">
+          <h4>Tiếng Việt</h4>
+          <div class="match-item" id="p1m-R3" onclick="selectMatch(this,'p1m','R3')"><span class="match-num" style="background:#546e7a">A</span> nước máy</div>
+          <div class="match-item" id="p1m-R7" onclick="selectMatch(this,'p1m','R7')"><span class="match-num" style="background:#546e7a">B</span> máy bơm áp suất cao</div>
+          <div class="match-item" id="p1m-R1" onclick="selectMatch(this,'p1m','R1')"><span class="match-num" style="background:#546e7a">C</span> hệ thống cấp thoát nước</div>
+          <div class="match-item" id="p1m-R9" onclick="selectMatch(this,'p1m','R9')"><span class="match-num" style="background:#546e7a">D</span> hệ thống thông khí</div>
+          <div class="match-item" id="p1m-R5" onclick="selectMatch(this,'p1m','R5')"><span class="match-num" style="background:#546e7a">E</span> thiết bị lắp đặt</div>
+          <div class="match-item" id="p1m-R10" onclick="selectMatch(this,'p1m','R10')"><span class="match-num" style="background:#546e7a">F</span> gang</div>
+          <div class="match-item" id="p1m-R2" onclick="selectMatch(this,'p1m','R2')"><span class="match-num" style="background:#546e7a">G</span> đường ống</div>
+          <div class="match-item" id="p1m-R6" onclick="selectMatch(this,'p1m','R6')"><span class="match-num" style="background:#546e7a">H</span> chất thải theo dòng nước</div>
+          <div class="match-item" id="p1m-R8" onclick="selectMatch(this,'p1m','R8')"><span class="match-num" style="background:#546e7a">I</span> hệ thống sưởi tập trung</div>
+          <div class="match-item" id="p1m-R4" onclick="selectMatch(this,'p1m','R4')"><span class="match-num" style="background:#546e7a">J</span> hệ thống thoát nước</div>
+        </div>
+      </div>
+      <div id="p1m-score" style="margin-top:8px;"></div>
+      <div class="btn-row">
+        <button class="btn btn-gray" onclick="resetMatch('p1m')">🔄 Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MCQ -->
+  <div class="ex-panel" id="p1-q" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head">
+        <div class="sec-icon">❓</div>
+        <h3>Multiple choice – Plumbing systems</h3>
+        <span class="sec-tag">8 questions</span>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">1.</span> A plumbing system concerns the distribution of ___ and the removal of waterborne waste.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> hot water</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> tap water</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> rainwater</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> wastewater</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">2.</span> Water systems of ancient times used pipes made of ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> copper and brass</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> steel and plastic</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> clay, lead or stone</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> cast iron and brass</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">3.</span> Today, water supply systems use ___ and pipes made of non-toxic materials.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> electric valves</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> high pressure pumps</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> gravity tanks</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> solar collectors</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">4.</span> Which of the following is NOT a non-toxic material used in modern pipes?</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> copper</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> lead</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> brass</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> plastic</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">5.</span> "Hệ thống thoát nước" in English is ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> water supply system</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> vent system</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> drainage system</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> plumbing installation</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">6.</span> Used water and wastes are carried away by the ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> plumbing installation</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> water heater</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> drainage, waste and vent system</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> district heating</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">7.</span> "Chất thải theo dòng nước" means ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> tap water</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> waterborne waste</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> wastewater treatment</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> drainage waste</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">8.</span> District heating (hệ thống sưởi tập trung) provides ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> electrical supply</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> domestic hot water supply</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> air conditioning</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> solar energy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRANSLATION -->
+  <div class="ex-panel" id="p1-t" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head">
+        <div class="sec-icon">🌐</div>
+        <h3>Translate into Vietnamese</h3>
+        <span class="sec-tag">8 terms</span>
+      </div>
+      <div class="instruction">Dịch các thuật ngữ sau sang tiếng Việt.</div>
+      <div class="trans-item"><span class="trans-num">1</span><span class="trans-en">plumbing installation</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">2</span><span class="trans-en">water supply system</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">3</span><span class="trans-en">non-toxic materials</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">4</span><span class="trans-en">domestic hot water supply</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">5</span><span class="trans-en">distribution of tap water</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">6</span><span class="trans-en">removal of waterborne waste</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">7</span><span class="trans-en">high-pressure water pumps</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">8</span><span class="trans-en">carried away by the drainage system</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="btn-row">
+        <button class="btn btn-orange" onclick="toggleKey('p1tkey')">🔍 Xem đáp án</button>
+      </div>
+      <div class="answer-key" id="p1tkey">
+        <h4>✅ Đáp án dịch thuật – Plumbing</h4>
+        <div class="key-row"><span class="k-n">1</span><span class="k-a">lắp đặt hệ thống cấp thoát nước</span></div>
+        <div class="key-row"><span class="k-n">2</span><span class="k-a">hệ thống cấp nước</span></div>
+        <div class="key-row"><span class="k-n">3</span><span class="k-a">vật liệu không độc hại</span></div>
+        <div class="key-row"><span class="k-n">4</span><span class="k-a">nguồn cung cấp nước nóng sinh hoạt</span></div>
+        <div class="key-row"><span class="k-n">5</span><span class="k-a">sự phân phối nước máy</span></div>
+        <div class="key-row"><span class="k-n">6</span><span class="k-a">việc loại bỏ chất thải theo dòng nước</span></div>
+        <div class="key-row"><span class="k-n">7</span><span class="k-a">máy bơm nước áp suất cao</span></div>
+        <div class="key-row"><span class="k-n">8</span><span class="k-a">được dẫn đi bởi hệ thống thoát nước</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ELECTRICAL ==================== -->
+<div class="topic-panel" id="p2">
+  <div class="ex-nav">
+    <button class="ex-btn active" onclick="switchEx('p2','m',this)">🔗 Matching</button>
+    <button class="ex-btn" onclick="switchEx('p2','q',this)">❓ Multiple Choice</button>
+    <button class="ex-btn" onclick="switchEx('p2','t',this)">🌐 Translation</button>
+  </div>
+
+  <div class="ex-panel active" id="p2-m" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">🔗</div><h3>Match – Electrical systems</h3><span class="sec-tag">10 pairs</span></div>
+      <div class="instruction">Click a term on the left, then click its meaning on the right.</div>
+      <div class="match-grid">
+        <div class="match-col">
+          <h4>English Terms</h4>
+          <div class="match-item" id="p2m-L1" onclick="selectMatch(this,'p2m','1')"><span class="match-num">1</span> meter box</div>
+          <div class="match-item" id="p2m-L2" onclick="selectMatch(this,'p2m','2')"><span class="match-num">2</span> circuit breaker</div>
+          <div class="match-item" id="p2m-L3" onclick="selectMatch(this,'p2m','3')"><span class="match-num">3</span> electric panel board</div>
+          <div class="match-item" id="p2m-L4" onclick="selectMatch(this,'p2m','4')"><span class="match-num">4</span> smoke alarm</div>
+          <div class="match-item" id="p2m-L5" onclick="selectMatch(this,'p2m','5')"><span class="match-num">5</span> hard-wired appliance</div>
+          <div class="match-item" id="p2m-L6" onclick="selectMatch(this,'p2m','6')"><span class="match-num">6</span> circuit</div>
+          <div class="match-item" id="p2m-L7" onclick="selectMatch(this,'p2m','7')"><span class="match-num">7</span> electrician</div>
+          <div class="match-item" id="p2m-L8" onclick="selectMatch(this,'p2m','8')"><span class="match-num">8</span> lighting outlet</div>
+          <div class="match-item" id="p2m-L9" onclick="selectMatch(this,'p2m','9')"><span class="match-num">9</span> wiring</div>
+          <div class="match-item" id="p2m-L10" onclick="selectMatch(this,'p2m','10')"><span class="match-num">10</span> GFCI</div>
+        </div>
+        <div class="match-col">
+          <h4>Tiếng Việt</h4>
+          <div class="match-item" id="p2m-R2" onclick="selectMatch(this,'p2m','R2')"><span class="match-num" style="background:#546e7a">A</span> cầu dao tự động (CB)</div>
+          <div class="match-item" id="p2m-R8" onclick="selectMatch(this,'p2m','R8')"><span class="match-num" style="background:#546e7a">B</span> điểm cấp điện chiếu sáng</div>
+          <div class="match-item" id="p2m-R5" onclick="selectMatch(this,'p2m','R5')"><span class="match-num" style="background:#546e7a">C</span> thiết bị đấu nối cố định</div>
+          <div class="match-item" id="p2m-R10" onclick="selectMatch(this,'p2m','R10')"><span class="match-num" style="background:#546e7a">D</span> thiết bị ngắt mạch chống rò điện</div>
+          <div class="match-item" id="p2m-R1" onclick="selectMatch(this,'p2m','R1')"><span class="match-num" style="background:#546e7a">E</span> hộp công tơ điện</div>
+          <div class="match-item" id="p2m-R7" onclick="selectMatch(this,'p2m','R7')"><span class="match-num" style="background:#546e7a">F</span> thợ điện</div>
+          <div class="match-item" id="p2m-R3" onclick="selectMatch(this,'p2m','R3')"><span class="match-num" style="background:#546e7a">G</span> bảng điện chính / tủ điện</div>
+          <div class="match-item" id="p2m-R9" onclick="selectMatch(this,'p2m','R9')"><span class="match-num" style="background:#546e7a">H</span> hệ thống dây dẫn điện</div>
+          <div class="match-item" id="p2m-R4" onclick="selectMatch(this,'p2m','R4')"><span class="match-num" style="background:#546e7a">I</span> thiết bị báo cháy</div>
+          <div class="match-item" id="p2m-R6" onclick="selectMatch(this,'p2m','R6')"><span class="match-num" style="background:#546e7a">J</span> mạch điện</div>
+        </div>
+      </div>
+      <div id="p2m-score" style="margin-top:8px;"></div>
+      <div class="btn-row"><button class="btn btn-gray" onclick="resetMatch('p2m')">🔄 Reset</button></div>
+    </div>
+  </div>
+
+  <div class="ex-panel" id="p2-q" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">❓</div><h3>Multiple choice – Electrical systems</h3><span class="sec-tag">6 questions</span></div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">1.</span> The electrical service is usually between ___ amps.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> 50 and 100</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> 100 and 200</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> 200 and 300</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> 50 and 150</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">2.</span> The meter box is situated ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> inside the house</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> outside the house</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> in the basement</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> on the roof</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">3.</span> "Bảng điện chính" in English is ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> meter box</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> electric panel board</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> circuit breaker</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> wiring system</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">4.</span> Safety measures in electrical systems include ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> radiators and boilers</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> valves and meters</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> circuit breakers and smoke alarms</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> ducts and vents</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">5.</span> GFCI stands for ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> General Fault Circuit Indicator</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> Ground Fault Circuit Interrupter</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> Ground Frequency Circuit Installer</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> General Fault Current Insulator</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">6.</span> "Cầu dao tự động" means ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> smoke alarm</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> wiring system</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> circuit breaker</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> meter box</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-panel" id="p2-t" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">🌐</div><h3>Translate into Vietnamese – Electrical</h3><span class="sec-tag">8 terms</span></div>
+      <div class="instruction">Dịch các thuật ngữ sau sang tiếng Việt.</div>
+      <div class="trans-item"><span class="trans-num">1</span><span class="trans-en">electrical service</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">2</span><span class="trans-en">hard-wired appliance</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">3</span><span class="trans-en">electric panel board</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">4</span><span class="trans-en">divide up across circuits</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">5</span><span class="trans-en">ground fault protection</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">6</span><span class="trans-en">advanced wiring systems</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">7</span><span class="trans-en">supply different areas with electricity</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">8</span><span class="trans-en">follow safety measures</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="btn-row"><button class="btn btn-orange" onclick="toggleKey('p2tkey')">🔍 Xem đáp án</button></div>
+      <div class="answer-key" id="p2tkey">
+        <h4>✅ Đáp án dịch thuật – Electrical</h4>
+        <div class="key-row"><span class="k-n">1</span><span class="k-a">nguồn cấp điện</span></div>
+        <div class="key-row"><span class="k-n">2</span><span class="k-a">thiết bị đấu nối cố định</span></div>
+        <div class="key-row"><span class="k-n">3</span><span class="k-a">bảng điện chính / tủ điện</span></div>
+        <div class="key-row"><span class="k-n">4</span><span class="k-a">phân chia thành nhiều mạch điện</span></div>
+        <div class="key-row"><span class="k-n">5</span><span class="k-a">bảo vệ chống rò điện</span></div>
+        <div class="key-row"><span class="k-n">6</span><span class="k-a">hệ thống dây điện tiên tiến / hiện đại</span></div>
+        <div class="key-row"><span class="k-n">7</span><span class="k-a">cung cấp điện cho các khu vực khác nhau</span></div>
+        <div class="key-row"><span class="k-n">8</span><span class="k-a">tuân thủ các biện pháp an toàn</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HEATING ==================== -->
+<div class="topic-panel" id="p3">
+  <div class="ex-nav">
+    <button class="ex-btn active" onclick="switchEx('p3','m',this)">🔗 Matching</button>
+    <button class="ex-btn" onclick="switchEx('p3','q',this)">❓ Multiple Choice</button>
+    <button class="ex-btn" onclick="switchEx('p3','t',this)">🌐 Translation</button>
+  </div>
+  <div class="ex-panel active" id="p3-m" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">🔗</div><h3>Match – Heating systems</h3><span class="sec-tag">10 pairs</span></div>
+      <div class="instruction">Click a term on the left, then click its meaning on the right.</div>
+      <div class="match-grid">
+        <div class="match-col">
+          <h4>English Terms</h4>
+          <div class="match-item" id="p3m-L1" onclick="selectMatch(this,'p3m','1')"><span class="match-num">1</span> thermostat</div>
+          <div class="match-item" id="p3m-L2" onclick="selectMatch(this,'p3m','2')"><span class="match-num">2</span> boiler</div>
+          <div class="match-item" id="p3m-L3" onclick="selectMatch(this,'p3m','3')"><span class="match-num">3</span> radiator</div>
+          <div class="match-item" id="p3m-L4" onclick="selectMatch(this,'p3m','4')"><span class="match-num">4</span> heat pump</div>
+          <div class="match-item" id="p3m-L5" onclick="selectMatch(this,'p3m','5')"><span class="match-num">5</span> hydronic heating</div>
+          <div class="match-item" id="p3m-L6" onclick="selectMatch(this,'p3m','6')"><span class="match-num">6</span> kerosene</div>
+          <div class="match-item" id="p3m-L7" onclick="selectMatch(this,'p3m','7')"><span class="match-num">7</span> furnace</div>
+          <div class="match-item" id="p3m-L8" onclick="selectMatch(this,'p3m','8')"><span class="match-num">8</span> skirting board heater</div>
+          <div class="match-item" id="p3m-L9" onclick="selectMatch(this,'p3m','9')"><span class="match-num">9</span> driveway</div>
+          <div class="match-item" id="p3m-L10" onclick="selectMatch(this,'p3m','10')"><span class="match-num">10</span> portable space heater</div>
+        </div>
+        <div class="match-col">
+          <h4>Tiếng Việt</h4>
+          <div class="match-item" id="p3m-R4" onclick="selectMatch(this,'p3m','R4')"><span class="match-num" style="background:#546e7a">A</span> máy bơm nhiệt</div>
+          <div class="match-item" id="p3m-R10" onclick="selectMatch(this,'p3m','R10')"><span class="match-num" style="background:#546e7a">B</span> máy sưởi di động</div>
+          <div class="match-item" id="p3m-R1" onclick="selectMatch(this,'p3m','R1')"><span class="match-num" style="background:#546e7a">C</span> bộ điều nhiệt</div>
+          <div class="match-item" id="p3m-R7" onclick="selectMatch(this,'p3m','R7')"><span class="match-num" style="background:#546e7a">D</span> lò sưởi</div>
+          <div class="match-item" id="p3m-R3" onclick="selectMatch(this,'p3m','R3')"><span class="match-num" style="background:#546e7a">E</span> bộ tản nhiệt</div>
+          <div class="match-item" id="p3m-R8" onclick="selectMatch(this,'p3m','R8')"><span class="match-num" style="background:#546e7a">F</span> bộ sưởi chân tường</div>
+          <div class="match-item" id="p3m-R2" onclick="selectMatch(this,'p3m','R2')"><span class="match-num" style="background:#546e7a">G</span> nồi hơi</div>
+          <div class="match-item" id="p3m-R5" onclick="selectMatch(this,'p3m','R5')"><span class="match-num" style="background:#546e7a">H</span> hệ thống sưởi bằng nước nóng tuần hoàn</div>
+          <div class="match-item" id="p3m-R6" onclick="selectMatch(this,'p3m','R6')"><span class="match-num" style="background:#546e7a">I</span> dầu hỏa</div>
+          <div class="match-item" id="p3m-R9" onclick="selectMatch(this,'p3m','R9')"><span class="match-num" style="background:#546e7a">J</span> lối xe vào nhà</div>
+        </div>
+      </div>
+      <div id="p3m-score" style="margin-top:8px;"></div>
+      <div class="btn-row"><button class="btn btn-gray" onclick="resetMatch('p3m')">🔄 Reset</button></div>
+    </div>
+  </div>
+  <div class="ex-panel" id="p3-q" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">❓</div><h3>Multiple choice – Heating systems</h3><span class="sec-tag">6 questions</span></div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">1.</span> All climate-control systems have ___ basic components.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> two</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> three</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> four</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> five</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">2.</span> Electric heat pumps can also be used as ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> boilers</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> air conditioners</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> radiators</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> furnaces</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">3.</span> "Hệ thống sưởi bằng nước nóng tuần hoàn" is ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> central heating system</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> radiant floor system</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> hydronic heating</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> portable space heater</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">4.</span> Hydronic heating systems can be installed under concrete in driveways to ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> save energy</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> keep snow and ice from accumulating</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> reduce noise</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> prevent flooding</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">5.</span> Radiant skirting board heaters are described as ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> round, plastic units</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> long, metal units with electrical elements inside</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> small, portable devices</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> ceiling-mounted panels</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">6.</span> Portable space heaters work with ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> electricity only</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> gas only</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> kerosene only</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">D</span> electricity, gas or kerosene</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ex-panel" id="p3-t" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">🌐</div><h3>Translate into Vietnamese – Heating</h3><span class="sec-tag">8 terms</span></div>
+      <div class="instruction">Dịch các thuật ngữ sau sang tiếng Việt.</div>
+      <div class="trans-item"><span class="trans-num">1</span><span class="trans-en">central heating system</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">2</span><span class="trans-en">radiant ceiling or floor systems</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">3</span><span class="trans-en">circulating water</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">4</span><span class="trans-en">climate-control system</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">5</span><span class="trans-en">portable space heater</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">6</span><span class="trans-en">skirting board heater</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">7</span><span class="trans-en">fuel is burned</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">8</span><span class="trans-en">pipes take hot water to radiators</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="btn-row"><button class="btn btn-orange" onclick="toggleKey('p3tkey')">🔍 Xem đáp án</button></div>
+      <div class="answer-key" id="p3tkey">
+        <h4>✅ Đáp án dịch thuật – Heating</h4>
+        <div class="key-row"><span class="k-n">1</span><span class="k-a">hệ thống sưởi trung tâm</span></div>
+        <div class="key-row"><span class="k-n">2</span><span class="k-a">hệ thống sưởi bức xạ trên trần hoặc dưới sàn</span></div>
+        <div class="key-row"><span class="k-n">3</span><span class="k-a">nước tuần hoàn</span></div>
+        <div class="key-row"><span class="k-n">4</span><span class="k-a">hệ thống điều hòa khí hậu</span></div>
+        <div class="key-row"><span class="k-n">5</span><span class="k-a">máy sưởi di động</span></div>
+        <div class="key-row"><span class="k-n">6</span><span class="k-a">bộ sưởi chân tường</span></div>
+        <div class="key-row"><span class="k-n">7</span><span class="k-a">khi nhiên liệu được đốt cháy</span></div>
+        <div class="key-row"><span class="k-n">8</span><span class="k-a">các đường ống dẫn nước nóng đến các bộ tản nhiệt</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SOLAR ==================== -->
+<div class="topic-panel" id="p4">
+  <div class="ex-nav">
+    <button class="ex-btn active" onclick="switchEx('p4','m',this)">🔗 Matching</button>
+    <button class="ex-btn" onclick="switchEx('p4','q',this)">❓ Multiple Choice</button>
+    <button class="ex-btn" onclick="switchEx('p4','t',this)">🌐 Translation</button>
+  </div>
+  <div class="ex-panel active" id="p4-m" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">🔗</div><h3>Match – Solar heating</h3><span class="sec-tag">10 pairs</span></div>
+      <div class="instruction">Click a term on the left, then click its meaning on the right.</div>
+      <div class="match-grid">
+        <div class="match-col">
+          <h4>English Terms</h4>
+          <div class="match-item" id="p4m-L1" onclick="selectMatch(this,'p4m','1')"><span class="match-num">1</span> solar panel</div>
+          <div class="match-item" id="p4m-L2" onclick="selectMatch(this,'p4m','2')"><span class="match-num">2</span> semiconductor</div>
+          <div class="match-item" id="p4m-L3" onclick="selectMatch(this,'p4m','3')"><span class="match-num">3</span> thermal collector</div>
+          <div class="match-item" id="p4m-L4" onclick="selectMatch(this,'p4m','4')"><span class="match-num">4</span> storage tank</div>
+          <div class="match-item" id="p4m-L5" onclick="selectMatch(this,'p4m','5')"><span class="match-num">5</span> natural convection</div>
+          <div class="match-item" id="p4m-L6" onclick="selectMatch(this,'p4m','6')"><span class="match-num">6</span> renewable energy</div>
+          <div class="match-item" id="p4m-L7" onclick="selectMatch(this,'p4m','7')"><span class="match-num">7</span> conventional boiler</div>
+          <div class="match-item" id="p4m-L8" onclick="selectMatch(this,'p4m','8')"><span class="match-num">8</span> photovoltaic system</div>
+          <div class="match-item" id="p4m-L9" onclick="selectMatch(this,'p4m','9')"><span class="match-num">9</span> energy storage</div>
+          <div class="match-item" id="p4m-L10" onclick="selectMatch(this,'p4m','10')"><span class="match-num">10</span> environmental pollution</div>
+        </div>
+        <div class="match-col">
+          <h4>Tiếng Việt</h4>
+          <div class="match-item" id="p4m-R5" onclick="selectMatch(this,'p4m','R5')"><span class="match-num" style="background:#546e7a">A</span> đối lưu tự nhiên</div>
+          <div class="match-item" id="p4m-R8" onclick="selectMatch(this,'p4m','R8')"><span class="match-num" style="background:#546e7a">B</span> hệ thống quang điện mặt trời</div>
+          <div class="match-item" id="p4m-R1" onclick="selectMatch(this,'p4m','R1')"><span class="match-num" style="background:#546e7a">C</span> tấm pin mặt trời</div>
+          <div class="match-item" id="p4m-R10" onclick="selectMatch(this,'p4m','R10')"><span class="match-num" style="background:#546e7a">D</span> ô nhiễm môi trường</div>
+          <div class="match-item" id="p4m-R3" onclick="selectMatch(this,'p4m','R3')"><span class="match-num" style="background:#546e7a">E</span> bộ thu nhiệt</div>
+          <div class="match-item" id="p4m-R7" onclick="selectMatch(this,'p4m','R7')"><span class="match-num" style="background:#546e7a">F</span> nồi hơi truyền thống</div>
+          <div class="match-item" id="p4m-R2" onclick="selectMatch(this,'p4m','R2')"><span class="match-num" style="background:#546e7a">G</span> chất bán dẫn</div>
+          <div class="match-item" id="p4m-R9" onclick="selectMatch(this,'p4m','R9')"><span class="match-num" style="background:#546e7a">H</span> lưu trữ năng lượng</div>
+          <div class="match-item" id="p4m-R4" onclick="selectMatch(this,'p4m','R4')"><span class="match-num" style="background:#546e7a">I</span> bồn chứa</div>
+          <div class="match-item" id="p4m-R6" onclick="selectMatch(this,'p4m','R6')"><span class="match-num" style="background:#546e7a">J</span> năng lượng tái tạo</div>
+        </div>
+      </div>
+      <div id="p4m-score" style="margin-top:8px;"></div>
+      <div class="btn-row"><button class="btn btn-gray" onclick="resetMatch('p4m')">🔄 Reset</button></div>
+    </div>
+  </div>
+  <div class="ex-panel" id="p4-q" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">❓</div><h3>Multiple choice – Solar energy</h3><span class="sec-tag">6 questions</span></div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">1.</span> In solar photovoltaic systems, electricity is produced when ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> water flows through panels</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> sunlight hits the semiconductor cells</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> wind turns the panels</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> the boiler is activated</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">2.</span> The main disadvantage of solar photovoltaic technology is ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> it causes a lot of pollution</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> it is expensive and storing energy is a problem</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> it only works in summer</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> it requires a lot of maintenance</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">3.</span> "Bộ thu nhiệt" in English is ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> storage tank</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> thermal collector</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> solar panel</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> heat exchanger</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">4.</span> The storage tank in solar thermal systems is mounted ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> in the basement</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> inside the wall</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> immediately above or below the solar collectors on the roof</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> next to the boiler</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">5.</span> Which of the following is an advantage of solar thermal systems?</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> very cheap to install</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> renewable and creates less environmental pollution</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> works without sunlight</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> no maintenance needed</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">6.</span> A conventional boiler can be used to ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> generate solar electricity</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> make the water hotter or provide hot water when solar energy is unavailable</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> store solar energy</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> cool down the storage tank</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ex-panel" id="p4-t" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">🌐</div><h3>Translate into Vietnamese – Solar</h3><span class="sec-tag">8 terms</span></div>
+      <div class="instruction">Dịch các thuật ngữ sau sang tiếng Việt.</div>
+      <div class="trans-item"><span class="trans-num">1</span><span class="trans-en">solar photovoltaic system</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">2</span><span class="trans-en">react with sunlight</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">3</span><span class="trans-en">store energy</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">4</span><span class="trans-en">mounted on the roof</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">5</span><span class="trans-en">reduce environmental pollution</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">6</span><span class="trans-en">hot water cylinder</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">7</span><span class="trans-en">renewable source of energy</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">8</span><span class="trans-en">natural convection</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="btn-row"><button class="btn btn-orange" onclick="toggleKey('p4tkey')">🔍 Xem đáp án</button></div>
+      <div class="answer-key" id="p4tkey">
+        <h4>✅ Đáp án dịch thuật – Solar</h4>
+        <div class="key-row"><span class="k-n">1</span><span class="k-a">hệ thống quang điện mặt trời</span></div>
+        <div class="key-row"><span class="k-n">2</span><span class="k-a">phản ứng với ánh sáng mặt trời</span></div>
+        <div class="key-row"><span class="k-n">3</span><span class="k-a">lưu trữ năng lượng</span></div>
+        <div class="key-row"><span class="k-n">4</span><span class="k-a">được lắp đặt trên mái nhà</span></div>
+        <div class="key-row"><span class="k-n">5</span><span class="k-a">giảm ô nhiễm môi trường</span></div>
+        <div class="key-row"><span class="k-n">6</span><span class="k-a">bình chứa nước nóng</span></div>
+        <div class="key-row"><span class="k-n">7</span><span class="k-a">nguồn năng lượng tái tạo</span></div>
+        <div class="key-row"><span class="k-n">8</span><span class="k-a">đối lưu tự nhiên</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== VENTILATION ==================== -->
+<div class="topic-panel" id="p5">
+  <div class="ex-nav">
+    <button class="ex-btn active" onclick="switchEx('p5','m',this)">🔗 Matching</button>
+    <button class="ex-btn" onclick="switchEx('p5','q',this)">❓ Multiple Choice</button>
+    <button class="ex-btn" onclick="switchEx('p5','t',this)">🌐 Translation</button>
+  </div>
+  <div class="ex-panel active" id="p5-m" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">🔗</div><h3>Match – Ventilation systems</h3><span class="sec-tag">10 pairs</span></div>
+      <div class="instruction">Click a term on the left, then click its meaning on the right.</div>
+      <div class="match-grid">
+        <div class="match-col">
+          <h4>English Terms</h4>
+          <div class="match-item" id="p5m-L1" onclick="selectMatch(this,'p5m','1')"><span class="match-num">1</span> moisture</div>
+          <div class="match-item" id="p5m-L2" onclick="selectMatch(this,'p5m','2')"><span class="match-num">2</span> duct</div>
+          <div class="match-item" id="p5m-L3" onclick="selectMatch(this,'p5m','3')"><span class="match-num">3</span> extractor fan</div>
+          <div class="match-item" id="p5m-L4" onclick="selectMatch(this,'p5m','4')"><span class="match-num">4</span> stale air</div>
+          <div class="match-item" id="p5m-L5" onclick="selectMatch(this,'p5m','5')"><span class="match-num">5</span> heat exchanger</div>
+          <div class="match-item" id="p5m-L6" onclick="selectMatch(this,'p5m','6')"><span class="match-num">6</span> infiltration</div>
+          <div class="match-item" id="p5m-L7" onclick="selectMatch(this,'p5m','7')"><span class="match-num">7</span> cross ventilation</div>
+          <div class="match-item" id="p5m-L8" onclick="selectMatch(this,'p5m','8')"><span class="match-num">8</span> VOC</div>
+          <div class="match-item" id="p5m-L9" onclick="selectMatch(this,'p5m','9')"><span class="match-num">9</span> balanced ventilation</div>
+          <div class="match-item" id="p5m-L10" onclick="selectMatch(this,'p5m','10')"><span class="match-num">10</span> radon</div>
+        </div>
+        <div class="match-col">
+          <h4>Tiếng Việt</h4>
+          <div class="match-item" id="p5m-R3" onclick="selectMatch(this,'p5m','R3')"><span class="match-num" style="background:#546e7a">A</span> quạt hút</div>
+          <div class="match-item" id="p5m-R7" onclick="selectMatch(this,'p5m','R7')"><span class="match-num" style="background:#546e7a">B</span> thông gió chéo</div>
+          <div class="match-item" id="p5m-R1" onclick="selectMatch(this,'p5m','R1')"><span class="match-num" style="background:#546e7a">C</span> độ ẩm</div>
+          <div class="match-item" id="p5m-R9" onclick="selectMatch(this,'p5m','R9')"><span class="match-num" style="background:#546e7a">D</span> thông gió cân bằng</div>
+          <div class="match-item" id="p5m-R5" onclick="selectMatch(this,'p5m','R5')"><span class="match-num" style="background:#546e7a">E</span> bộ trao đổi nhiệt</div>
+          <div class="match-item" id="p5m-R10" onclick="selectMatch(this,'p5m','R10')"><span class="match-num" style="background:#546e7a">F</span> khí radon</div>
+          <div class="match-item" id="p5m-R2" onclick="selectMatch(this,'p5m','R2')"><span class="match-num" style="background:#546e7a">G</span> ống dẫn gió</div>
+          <div class="match-item" id="p5m-R6" onclick="selectMatch(this,'p5m','R6')"><span class="match-num" style="background:#546e7a">H</span> sự thẩm thấu không khí</div>
+          <div class="match-item" id="p5m-R4" onclick="selectMatch(this,'p5m','R4')"><span class="match-num" style="background:#546e7a">I</span> không khí tù đọng</div>
+          <div class="match-item" id="p5m-R8" onclick="selectMatch(this,'p5m','R8')"><span class="match-num" style="background:#546e7a">J</span> hợp chất hữu cơ dễ bay hơi</div>
+        </div>
+      </div>
+      <div id="p5m-score" style="margin-top:8px;"></div>
+      <div class="btn-row"><button class="btn btn-gray" onclick="resetMatch('p5m')">🔄 Reset</button></div>
+    </div>
+  </div>
+  <div class="ex-panel" id="p5-q" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">❓</div><h3>Multiple choice – Ventilation</h3><span class="sec-tag">6 questions</span></div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">1.</span> Ventilation is important to reduce ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> electricity consumption</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> indoor moisture, odours and pollutants</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> construction costs</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> heating bills</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">2.</span> The disadvantage of natural ventilation is that it is ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> too expensive</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> uncontrollable</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> noisy</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> dangerous</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">3.</span> Spot ventilation uses ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> ducts throughout the building</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> localised fans in rooms where contaminants are generated</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> natural airflow through windows</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> heat exchangers on the roof</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">4.</span> "Thông gió cân bằng" means ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> exhaust ventilation</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> supply ventilation</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> balanced ventilation</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> natural ventilation</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">5.</span> Heat exchangers are designed to ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> generate solar energy</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">B</span> recuperate heat lost through controlled ventilation</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">C</span> cool down the incoming air</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> filter dust from the air</button>
+        </div>
+      </div>
+      <div class="mcq-item">
+        <div class="mcq-q"><span class="qnum">6.</span> VOC stands for ___.</div>
+        <div class="mcq-opts">
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">A</span> Ventilation Outlet Control</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">B</span> Variable Organic Compounds</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'correct')"><span class="opt-letter">C</span> Volatile Organic Compounds</button>
+          <button class="mcq-opt" onclick="checkMcq(this,'wrong')"><span class="opt-letter">D</span> Ventilated Organic Contaminants</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ex-panel" id="p5-t" style="margin-top:14px;">
+    <div class="section">
+      <div class="sec-head"><div class="sec-icon">🌐</div><h3>Translate into Vietnamese – Ventilation</h3><span class="sec-tag">8 terms</span></div>
+      <div class="instruction">Dịch các thuật ngữ sau sang tiếng Việt.</div>
+      <div class="trans-item"><span class="trans-num">1</span><span class="trans-en">exhaust ventilation</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">2</span><span class="trans-en">supply ventilation</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">3</span><span class="trans-en">moisture control switch</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">4</span><span class="trans-en">trickle ventilator</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">5</span><span class="trans-en">exhaust stale air</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">6</span><span class="trans-en">toxic products from combustion</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">7</span><span class="trans-en">poorly ventilated homes</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="trans-item"><span class="trans-num">8</span><span class="trans-en">lead to physical damage</span><input class="trans-input" type="text" placeholder="Tiếng Việt..."></div>
+      <div class="btn-row"><button class="btn btn-orange" onclick="toggleKey('p5tkey')">🔍 Xem đáp án</button></div>
+      <div class="answer-key" id="p5tkey">
+        <h4>✅ Đáp án dịch thuật – Ventilation</h4>
+        <div class="key-row"><span class="k-n">1</span><span class="k-a">thông gió hút</span></div>
+        <div class="key-row"><span class="k-n">2</span><span class="k-a">thông gió cấp</span></div>
+        <div class="key-row"><span class="k-n">3</span><span class="k-a">công tắc kiểm soát độ ẩm</span></div>
+        <div class="key-row"><span class="k-n">4</span><span class="k-a">cửa thông gió nhỏ (có thể điều chỉnh)</span></div>
+        <div class="key-row"><span class="k-n">5</span><span class="k-a">thải không khí tù đọng</span></div>
+        <div class="key-row"><span class="k-n">6</span><span class="k-a">sản phẩm độc hại từ quá trình đốt cháy</span></div>
+        <div class="key-row"><span class="k-n">7</span><span class="k-a">nhà ở thông gió kém</span></div>
+        <div class="key-row"><span class="k-n">8</span><span class="k-a">gây hư hại vật lý</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// TOPIC SWITCHING
+function switchTopic(id, el) {
+  document.querySelectorAll('.topic-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.topic-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// EX TYPE SWITCHING
+function switchEx(topic, type, el) {
+  var prefix = topic + '-';
+  document.querySelectorAll('#' + topic + ' .ex-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#' + topic + ' .ex-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(prefix + type).classList.add('active');
+  el.classList.add('active');
+}
+
+// MATCHING LOGIC
+var matchState = {};
+var matchAnswers = {
+  p1m: {1:'R1',2:'R2',3:'R3',4:'R4',5:'R5',6:'R6',7:'R7',8:'R8',9:'R9',10:'R10'},
+  p2m: {1:'R1',2:'R2',3:'R3',4:'R4',5:'R5',6:'R6',7:'R7',8:'R8',9:'R9',10:'R10'},
+  p3m: {1:'R1',2:'R2',3:'R3',4:'R4',5:'R5',6:'R6',7:'R7',8:'R8',9:'R9',10:'R10'},
+  p4m: {1:'R1',2:'R2',3:'R3',4:'R4',5:'R5',6:'R6',7:'R7',8:'R8',9:'R9',10:'R10'},
+  p5m: {1:'R1',2:'R2',3:'R3',4:'R4',5:'R5',6:'R6',7:'R7',8:'R8',9:'R9',10:'R10'},
+};
+
+function selectMatch(el, prefix, id) {
+  if (el.classList.contains('matched')) return;
+  if (!matchState[prefix]) matchState[prefix] = {left: null, right: null, score: 0};
+  var state = matchState[prefix];
+  var isLeft = !id.startsWith('R');
+
+  // Deselect previous same-side
+  if (isLeft && state.left) {
+    var prev = document.getElementById(prefix + '-L' + state.left);
+    if (prev) prev.classList.remove('selected');
+  }
+  if (!isLeft && state.right) {
+    var prev2 = document.getElementById(prefix + '-' + state.right);
+    if (prev2) prev2.classList.remove('selected');
+  }
+
+  el.classList.add('selected');
+  if (isLeft) state.left = id;
+  else state.right = id;
+
+  if (state.left && state.right) {
+    var correctRight = matchAnswers[prefix][state.left];
+    if (state.right === correctRight) {
+      document.getElementById(prefix + '-L' + state.left).classList.remove('selected');
+      document.getElementById(prefix + '-L' + state.left).classList.add('matched');
+      document.getElementById(prefix + '-' + state.right).classList.remove('selected');
+      document.getElementById(prefix + '-' + state.right).classList.add('matched');
+      state.score++;
+      updateMatchScore(prefix, state.score);
+    } else {
+      var lEl = document.getElementById(prefix + '-L' + state.left);
+      var rEl = document.getElementById(prefix + '-' + state.right);
+      lEl.classList.add('wrong'); rEl.classList.add('wrong');
+      setTimeout(function() {
+        lEl.classList.remove('wrong','selected');
+        rEl.classList.remove('wrong','selected');
+      }, 600);
+    }
+    state.left = null; state.right = null;
+  }
+}
+
+function updateMatchScore(prefix, score) {
+  var el = document.getElementById(prefix + '-score');
+  if (!el) return;
+  var cls = score >= 8 ? 'score-good' : score >= 5 ? 'score-mid' : 'score-low';
+  el.innerHTML = '<span class="score-badge ' + cls + '">' + score + '/10 matched</span>';
+}
+
+function resetMatch(prefix) {
+  matchState[prefix] = {left:null, right:null, score:0};
+  document.querySelectorAll('[id^="' + prefix + '"]').forEach(function(el) {
+    el.classList.remove('matched','selected','wrong');
+  });
+  var sc = document.getElementById(prefix + '-score');
+  if (sc) sc.innerHTML = '';
+}
+
+// MCQ LOGIC
+function checkMcq(btn, result) {
+  var opts = btn.parentElement.querySelectorAll('.mcq-opt');
+  opts.forEach(function(o) { o.classList.add('disabled'); o.onclick = null; });
+  if (result === 'correct') {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+    opts.forEach(function(o) {
+      if (o.getAttribute('onclick') === null && !o.classList.contains('wrong')) {
+        // find correct
+      }
+    });
+  }
+}
+
+// ANSWER KEY TOGGLE
+function toggleKey(id) {
+  var el = document.getElementById(id);
+  var btn = el.previousElementSibling.querySelector('button');
+  if (!el.style.display || el.style.display === 'none') {
+    el.style.display = 'block';
+    btn.textContent = '🙈 Ẩn đáp án';
+    btn.style.background = '#c62828';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = '🔍 Xem đáp án';
+    btn.style.background = '';
+  }
+}
+</script>
+</body>
+</html>
